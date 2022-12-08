@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kgproject.dao.QuesMapper">
+    <select id="getQuesListByIdList" resultType="com.kgproject.model.vo.QuesVO">
+        select *
+        from ques
+        <where>
+            <if test="type!=null">
+                type = #{type} and
+            </if>
+            <foreach collection="ids" item="id" open="id in (" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+    <select id="getAnswerById" resultType="java.lang.String">
+        select correct_answer from ques where id = #{id}
+    </select>
+    <select id="getQuesById" resultType="com.kgproject.model.vo.QuesVO">
+        select * from ques where id = #{id}
+    </select>
+    <select id="getDetailsById" resultType="com.kgproject.model.entity.Ques">
+        select * from ques where id = #{id}
+    </select>
+</mapper>

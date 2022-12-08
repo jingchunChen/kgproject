@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgproject.dao.ConnectionMapper">
+    <select id="findConnectionById" resultType="com.kgproject.model.entity.Connection">
+        select * from `connection` where id = #{id}
+    </select>
+    <select id="findConnectionBySource" resultType="com.kgproject.model.entity.Connection">
+        select * from `connection` where node = #{SourceNode}
+    </select>
+    <select id="findConnectionByTarget" resultType="com.kgproject.model.entity.Connection">
+        select * from `connection` where node = #{TargetNode}
+    </select>
+    <select id="findConnectionByNode" resultType="com.kgproject.model.entity.Connection">
+        select * from `connection` where `source` = #{node} or target = #{node}
+    </select>
+    <select id="findAllConnection" resultType="com.kgproject.model.entity.Connection">
+        select * from `connection`;
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kgproject.dao.UserQuesMapper">
+    <insert id="insertUserQues">
+        replace into user_ques(user_id, ques_id, `status`, answer) values(#{userId}, #{quesId}, #{status}, #{answer})
+    </insert>
+    <select id="searchByUserId" resultType="com.kgproject.model.entity.UserQues">
+        select *
+        from user_ques
+        where user_id = #{id}
+    </select>
+    <select id="getQuesRecordsByPaperId" resultType="com.kgproject.model.vo.QuesVO">
+        select q.id, q.question, q.type, uq.status
+        from user_ques uq, ques q, paper_ques p
+        where uq.user_id = #{userId} and p.paper_id = #{paperId} and q.id = uq.ques_id and p.ques_id = uq.ques_id
+    </select>
+    <select id="getQuesRecordByQuesId" resultType="com.kgproject.model.vo.QuesVO">
+        select q.id, q.question, q.type, uq.answer, q.A, q.B, q.C, q.D, q.E, uq.status
+        from user_ques uq, ques q
+        where uq.user_id = #{userId} and uq.ques_id = #{quesId} and q.id = #{quesId}
+    </select>
+</mapper>
